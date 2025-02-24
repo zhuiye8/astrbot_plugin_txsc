@@ -1,0 +1,21 @@
+{
+    "api_key": {
+        "description": "API密钥",
+        "type": "string",
+        "hint": "请填写API密钥",
+        "default": "",
+        "obvious_hint": false
+    },
+    "model": {
+        "description": "通义万相-文生图模型名称",
+        "type": "string",
+        "hint": "通义万相-文生图模型",
+        "default": "wanx2.1-t2i-turbo",
+        "obvious_hint": false
+    },
+    "prompt_extend": {
+        "description": "是否开启prompt智能改写,开启后会使用大模型对输入prompt进行智能改写，仅对正向提示词有效。对于较短的输入prompt生成效果提升明显，但会增加3-4秒耗时。",
+        "type": "bool",
+        "default": false
+    }
+}
