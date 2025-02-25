@@ -58,7 +58,7 @@ class MyPlugin(Star):
             return
 
         # 定义反向提示词关键词
-        negative_prompt_keywords =  ["不要", "避免", "无", "不包含", "不想要", "排除"]
+        negative_prompt_keywords =  ["不要", "避免", "无", "不包含", "不想要", "排除","没有"]
 
         # 初始化提示词和反向提示词
         prompt = ""
