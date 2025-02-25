@@ -58,7 +58,7 @@ class MyPlugin(Star):
             return
 
         # 定义反向提示词关键词
-        negative_prompt_keywords = ["不要", "避免"]
+        negative_prompt_keywords =  ["不要", "避免", "无", "不包含", "不想要", "排除"]
 
         # 初始化提示词和反向提示词
         prompt = ""
@@ -126,7 +126,7 @@ class MyPlugin(Star):
                 raise Exception(f"任务提交失败: {task_rsp.message}")
             
             # 等待任务完成
-            result_rsp = await asyncio.to_thread(ImageSynthesis.wait, task_rsp)
+            result_rsp = await asyncio.to_thread(ImageSynthesis.wait, task_rsp, api_key=self.api_key)
             
             if result_rsp.status_code == 200:
                 results = result_rsp.output.results
