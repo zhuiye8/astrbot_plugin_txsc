@@ -24,7 +24,11 @@ class Text2ImgPlugin(Star):
         self.provider = self.provider_map.get(config.get("default_provider", "阿里"), "alibaba")
         # 从配置读取触发关键词
         self.draw_keywords = config.get("draw_keywords", "画,绘画,画个,画张,画一个,画一张,生图,画画,img,painting,draw").split(",")
-        
+        # 从配置读取反向提示词处理开关
+        self.enable_negative_prompt_processing = config.get("enable_negative_prompt_processing", True)
+        # 从配置读取反向提示词关键词
+        self.negative_prompt_keywords = config.get("negative_prompt_keywords", "不要,避免,无,不包含,不想要,排除,没有").split(",")
+
         self.generators = {}
         
         # 初始化生成器
@@ -81,9 +85,6 @@ class Text2ImgPlugin(Star):
                 yield event.plain_result(f"\n未配置{provider_display}的API密钥，可用的服务商: {available_providers_str}")
             return
 
-        # 定义反向提示词关键词
-        negative_prompt_keywords = ["不要", "避免", "无", "不包含", "不想要", "排除", "没有"]
-
         # 初始化提示词和反向提示词
         prompt = ""
         negative_prompt = ""
@@ -92,12 +93,18 @@ class Text2ImgPlugin(Star):
         message = self._remove_provider_tag(message)
 
         # 尝试从消息中提取反向提示词
-        for keyword in negative_prompt_keywords:
-            if keyword in message:
-                match = re.search(rf"{keyword}(.+)", message)
-                if match:
-                    negative_prompt = match.group(1).strip()  # 获取反向提示词内容
-                    message = message.replace(match.group(0), "")  # 从消息中删除反向提示词部分
+        if self.enable_negative_prompt_processing:
+            for keyword in self.negative_prompt_keywords:
+                if keyword in message:
+                    # 使用正则表达式查找关键词后的所有内容
+                    match = re.search(rf"{keyword}(.*)", message, re.DOTALL)
+                    if match:
+                        # 提取反向提示词，并去除首尾空格
+                        negative_prompt = match.group(1).strip()
+                        # 从原始消息中移除关键词和反向提示词
+                        message = message.replace(match.group(0), "").strip()
+                        # 找到一个匹配后就跳出循环
+                        break
 
         # 余下的部分就是提示词
         prompt = message.strip()
