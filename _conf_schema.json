@@ -55,6 +55,18 @@
         "default": "画,绘画,画个,画张,画一个,画一张,生图,画画,img,painting,draw",
         "obvious_hint": false
     },
+    "enable_negative_prompt_processing": {
+        "description": "是否开启反向提示词处理",
+        "type": "bool",
+        "default": true
+    },
+    "negative_prompt_keywords": {
+        "description": "反向提示词关键词",
+        "type": "string",
+        "hint": "多个关键词用英文逗号分隔",
+        "default": "不要,避免,无,不包含,不想要,排除,没有",
+        "obvious_hint": false
+    },
     "prompt_extend": {
         "description": "是否开启prompt智能改写,开启后会使用大模型对输入prompt进行智能改写，仅对正向提示词有效。对于较短的输入prompt生成效果提升明显，但会增加3-4秒耗时。",
         "type": "bool",

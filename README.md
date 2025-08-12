@@ -36,6 +36,8 @@
 - `volcengine_model`: 火山引擎文生图模型名称
 - `fire_schedule_conf`: 火山引擎调度配置，可选"general_v20_9B_pe"(美感版)或"general_v20_9B_rephraser"(标准版)
 - `draw_keywords`: 触发文生图的关键词，多个关键词用英文逗号分隔
+- `enable_negative_prompt_processing`: 是否开启反向提示词处理，`true`为开启，`false`为关闭
+- `negative_prompt_keywords`: 反向提示词的关键词，多个关键词用英文逗号分隔
 - `prompt_extend`: 是否开启prompt智能改写(仅阿里云)
 
 ## 注意事项
