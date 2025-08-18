@@ -6,7 +6,7 @@ PPIO图像生成Provider实现
 import asyncio
 import json
 from typing import Optional, Dict, Any, List
-from astrbot.api.logger import logger
+from astrbot.api import logger
 import httpx
 
 from .base import BaseImageProvider, GenerationParams, GenerationResult, ResponseType, ProviderCapabilities

@@ -12,7 +12,7 @@ import asyncio
 from typing import Optional, Union, BinaryIO
 from PIL import Image
 import httpx
-from astrbot.api.logger import logger
+from astrbot.api import logger
 
 
 class ImageProcessor:

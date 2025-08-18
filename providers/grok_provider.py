@@ -6,7 +6,7 @@ Grok图像生成Provider实现
 import asyncio
 import base64
 from typing import Optional, Dict, Any, List
-from astrbot.api.logger import logger
+from astrbot.api import logger
 
 from .base import BaseImageProvider, GenerationParams, GenerationResult, ResponseType, ProviderCapabilities
 

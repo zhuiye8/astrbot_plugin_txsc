@@ -11,7 +11,7 @@ import json
 import time
 import urllib.parse
 from typing import Optional, Dict, Any, List
-from astrbot.api.logger import logger
+from astrbot.api import logger
 import httpx
 
 from .base import BaseImageProvider, GenerationParams, GenerationResult, ResponseType, ProviderCapabilities

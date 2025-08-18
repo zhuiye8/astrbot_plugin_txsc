@@ -3,7 +3,7 @@
 """
 
 from typing import Dict, Any, List, NamedTuple
-from astrbot.api.logger import logger
+from astrbot.api import logger
 
 
 class ValidationResult(NamedTuple):

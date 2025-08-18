@@ -8,7 +8,7 @@ import subprocess
 import importlib
 import asyncio
 from typing import Dict, List, Optional, Tuple
-from astrbot.api.logger import logger
+from astrbot.api import logger
 
 
 class SDKInstaller:

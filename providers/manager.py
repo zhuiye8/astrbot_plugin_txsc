@@ -6,7 +6,7 @@ Provider管理器
 from typing import Dict, List, Optional, Any, Union
 import asyncio
 import random
-from astrbot.api.logger import logger
+from astrbot.api import logger
 
 from .base import (
     BaseImageProvider, GenerationParams, GenerationResult, 

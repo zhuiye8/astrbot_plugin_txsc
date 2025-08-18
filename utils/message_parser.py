@@ -7,7 +7,7 @@ import re
 import asyncio
 from typing import Optional, Dict, Any, List, Tuple, NamedTuple
 from dataclasses import dataclass
-from astrbot.api.logger import logger
+from astrbot.api import logger
 
 from ..providers.base import GenerationParams, ImageSize, ResponseType
 

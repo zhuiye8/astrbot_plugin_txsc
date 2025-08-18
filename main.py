@@ -4,10 +4,10 @@ AstrBot通用文生图插件
 """
 
 from astrbot.api.event import filter, AstrMessageEvent
+from astrbot.api.event.filter import EventMessageType
 from astrbot.api.star import Context, Star, register
-from astrbot.api.all import *
-from astrbot.api.message_components import *
-from astrbot.api.logger import logger
+from astrbot.api.message_components import Plain, Image
+from astrbot.api import logger
 import re
 import asyncio
 import os
