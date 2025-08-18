@@ -418,7 +418,7 @@ class MessageParser:
         """同步命令解析（在线程池中执行）"""
         
         # 解析/t2i命令格式
-        if not message.startswith("/t2i"):
+        if not message.startswith("/tti"):
             return {"command": "unknown", "args": []}
         
         parts = message.split()

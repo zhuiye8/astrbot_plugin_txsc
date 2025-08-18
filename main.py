@@ -181,7 +181,7 @@ class UniversalText2ImgPlugin(Star):
         message = event.message_str
         
         # 检查是否为命令消息
-        if message.startswith("/t2i"):
+        if message.startswith("/tti"):
             await self._handle_command(event)
             return
         
@@ -360,11 +360,11 @@ class UniversalText2ImgPlugin(Star):
 • 生成一张海边日落的图片 不要建筑物
 
 🔧 命令用法:
-• /t2i help - 显示此帮助
-• /t2i status - 查看服务状态
-• /t2i providers - 列出可用服务商
-• /t2i test <provider> - 测试指定服务商
-• /t2i stats - 查看使用统计
+• /tti help - 显示此帮助
+• /tti status - 查看服务状态
+• /tti providers - 列出可用服务商
+• /tti test <provider> - 测试指定服务商
+• /tti stats - 查看使用统计
 
 🏷️ 支持的服务商标签:
 @阿里云 @火山引擎 @百度千帆 @科大讯飞 @智谱清言 @OpenAI达芬奇 @谷歌双子座 @Grok图像生成
@@ -424,7 +424,7 @@ class UniversalText2ImgPlugin(Star):
     async def _handle_test_command(self, event: AstrMessageEvent, provider_name: Optional[str]):
         """处理测试命令"""
         if not provider_name:
-            yield event.plain_result("\n🔧 请指定要测试的服务商，例如: /t2i test volcengine")
+            yield event.plain_result("\n🔧 请指定要测试的服务商，例如: /tti test volcengine")
             return
         
         # 查找Provider
