@@ -2,8 +2,8 @@
     "default_provider": {
         "description": "默认文生图服务提供商",
         "type": "string",
-        "hint": "请选择默认服务商：阿里、火山",
-        "default": "阿里",
+        "hint": "请选择默认服务商：阿里云通义万相(tongyi)、字节跳动火山引擎(volcengine)、百度智能云千帆(qianfan)、科大讯飞星火(xunfei)、智谱清言(zhipu)、OpenAI达芬奇(openai)、谷歌双子座(gemini)、PPIO图像生成(ppio)、Grok图像生成(grok)",
+        "default": "tongyi",
         "obvious_hint": false
     },
     "alibaba_api_key": {
@@ -71,5 +71,94 @@
         "description": "是否开启prompt智能改写,开启后会使用大模型对输入prompt进行智能改写，仅对正向提示词有效。对于较短的输入prompt生成效果提升明显，但会增加3-4秒耗时。",
         "type": "bool",
         "default": false
+    },
+    "enable_fallback": {
+        "description": "是否启用Provider故障转移",
+        "type": "bool",
+        "default": true
+    },
+    "baidu_api_key": {
+        "description": "百度千帆API密钥",
+        "type": "string",
+        "hint": "请填写百度千帆API密钥",
+        "default": "",
+        "obvious_hint": false
+    },
+    "baidu_secret_key": {
+        "description": "百度千帆Secret密钥",
+        "type": "string", 
+        "hint": "请填写百度千帆Secret密钥",
+        "default": "",
+        "obvious_hint": false
+    },
+    "xunfei_app_id": {
+        "description": "科大讯飞星火AppID",
+        "type": "string",
+        "hint": "请填写科大讯飞AppID",
+        "default": "",
+        "obvious_hint": false
+    },
+    "xunfei_api_secret": {
+        "description": "科大讯飞星火API Secret",
+        "type": "string",
+        "hint": "请填写科大讯飞API Secret",
+        "default": "",
+        "obvious_hint": false
+    },
+    "xunfei_api_key": {
+        "description": "科大讯飞星火API Key",
+        "type": "string",
+        "hint": "请填写科大讯飞API Key",
+        "default": "",
+        "obvious_hint": false
+    },
+    "ppio_api_key": {
+        "description": "PPIO API密钥",
+        "type": "string",
+        "hint": "请填写PPIO API密钥",
+        "default": "",
+        "obvious_hint": false
+    },
+    "zhipu_api_key": {
+        "description": "智谱AI API密钥",
+        "type": "string",
+        "hint": "请填写智谱AI API密钥",
+        "default": "",
+        "obvious_hint": false
+    },
+    "openai_api_key": {
+        "description": "OpenAI API密钥",
+        "type": "string",
+        "hint": "请填写OpenAI API密钥",
+        "default": "",
+        "obvious_hint": false
+    },
+    "openai_base_url": {
+        "description": "OpenAI API基础URL",
+        "type": "string",
+        "hint": "可选，自定义OpenAI API基础URL",
+        "default": "https://api.openai.com/v1",
+        "obvious_hint": false
+    },
+    "gemini_api_key": {
+        "description": "Google Gemini API密钥",
+        "type": "string",
+        "hint": "请填写Google Gemini API密钥",
+        "default": "",
+        "obvious_hint": false
+    },
+    "grok_api_key": {
+        "description": "Grok API密钥",
+        "type": "string",
+        "hint": "请填写xAI Grok API密钥",
+        "default": "",
+        "obvious_hint": false
+    },
+    "grok_base_url": {
+        "description": "Grok API基础URL",
+        "type": "string",
+        "hint": "Grok API基础URL",
+        "default": "https://api.x.ai/v1",
+        "obvious_hint": false
     }
 } 
