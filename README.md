@@ -1,201 +1,218 @@
-# AstrBot通用文生图插件 v2.0.0
+# 通用文生图插件
 
-![AstrBot](https://img.shields.io/badge/AstrBot-Plugin-blue)
-![Version](https://img.shields.io/badge/version-v2.0.0-green)
-![Python](https://img.shields.io/badge/python-3.8+-yellow)
-![License](https://img.shields.io/badge/license-MIT-red)
+这是一个为AstrBot开发的通用文生图插件，支持多家国内AI图像生成服务商的统一调用，提供便捷的文本到图像生成功能。
 
-一个支持9个主流AI图像生成服务商的AstrBot通用文生图插件，提供统一的调用接口和智能的负载均衡机制。
+## 支持的服务商
 
-## ✨ 特性
+| 服务商 | 命令 | 状态 | 说明 |
+|--------|------|------|------|
+| 智谱AI | `tti-zhipu` | ✅ | 支持cogview-4-250304模型 |
+| 百度千帆 | `tti-qianfan` | ✅ | 支持flux.1-schnell等模型 |
+| 阿里通义万相 | `tti-tongyi` | ✅ | 支持wanx-2.2模型 |
+| PPIO | `tti-ppio` | ✅ | 支持sd15等模型，异步任务机制 |
+| 火山引擎 | `tti-huoshan` | ✅ | 支持doubao-seedream-3-0-t2i-250415模型 |
+| 科大讯飞 | `tti-xunfei` | ✅ | 支持spark-v2.1模型 |
 
-- 🎨 **9大服务商支持**：集成阿里云通义万相、字节跳动火山引擎、百度智能云千帆、科大讯飞星火、智谱清言、OpenAI达芬奇、谷歌双子座、PPIO图像生成、Grok图像生成
-- 🚀 **异步高性能**：完全异步架构，支持并发处理和智能排队
-- 🔄 **智能故障转移**：自动切换服务商，确保服务可用性
-- 📏 **多尺寸支持**：支持各种图片尺寸，自动适配不同服务商
-- 🎭 **风格控制**：支持多种艺术风格，满足不同创作需求
-- 🚫 **负面提示词**：智能处理反向提示词，提升生成质量
-- 📊 **状态监控**：实时健康检查和使用统计
-- 🔧 **智能解析**：自动识别Provider、尺寸、风格等参数
-- 🛠️ **自动安装**：智能SDK依赖管理和安装
+> **注意**：境外服务商暂时不可用，已在代码中注释。(二开可以参考)
 
-## 🚀 快速开始
+## 安装与配置
 
-### 安装
-
-1. **下载插件**
-   ```bash
-   git clone https://github.com/zhuiye8/astrbot_plugin_txsc.git
-   cd astrbot_plugin_txsc
-   ```
-
-2. **安装依赖**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **配置插件**
-   在AstrBot管理界面配置至少一个服务商的API密钥
-
-### 基础使用
-
-```
-# 基础生成
-画一只可爱的小猫咪
-
-# 指定服务商
-@阿里云 画一张海边日落的风景图
-
-# 指定尺寸和风格
-画一张1024x1792的卡通风格小狗图片
-
-# 使用负面提示词
-生成一张森林图片 不要建筑物 不要人物
-
-# 高质量生成
-画一张超高质量的山水画
+### 1. 安装依赖
+```bash
+pip install -r requirements.txt
 ```
 
-### 命令使用
-
-```
-# 查看帮助
-/tti help
-
-# 查看服务商状态
-/tti status
-
-# 列出可用服务商
-/tti providers
-
-# 测试指定服务商
-/tti test volcengine
-
-# 查看使用统计
-/tti stats
-```
-
-## 🎯 支持的服务商
-
-| 服务商 | 中文名称 | 模型 | 特色功能 |
-|--------|----------|------|----------|
-| tongyi | 阿里云通义万相 | wanx2.1-t2i-turbo | 强大的中文理解、多尺寸支持 |
-| volcengine | 字节跳动火山引擎 | high_aes_general_v21_L | 高美感生成、调度配置 |
-| qianfan | 百度智能云千帆 | 千帆文生图 | 中文优化、风格多样 |
-| xunfei | 科大讯飞星火 | 星火图像生成 | 中文语义理解优秀 |
-| zhipu | 智谱清言 | CogView-3 | 多模态生成、创意表达 |
-| openai | OpenAI达芬奇 | DALL-E 3 | 业界领先质量、prompt优化 |
-| gemini | 谷歌双子座 | Imagen 2 | 多语言支持、安全过滤 |
-| ppio | PPIO图像生成 | ppio-diffusion-v1 | 去中心化、性价比高 |
-| grok | Grok图像生成 | grok-vision | 创意幽默、独特风格 |
-
-## ⚙️ 配置说明
-
-### 基础配置
+### 2. 配置文件
+在AstrBot配置文件中添加以下配置项：
 
 ```json
 {
-  "default_provider": "tongyi",
-  "enable_fallback": true,
-  "draw_keywords": "画,绘画,画个,画张,画一个,画一张,生图,画画,img,painting,draw",
-  "enable_negative_prompt_processing": true,
-  "negative_prompt_keywords": "不要,避免,无,不包含,不想要,排除,没有",
-  "prompt_extend": false
+  "astrbot_plugin_universal_t2i": {
+    "default_width": 512,
+    "default_height": 512,
+    
+    "zhipu_api_key": "your_zhipu_api_key",
+    "zhipu_base_url": "https://open.bigmodel.cn/api/paas/v4",
+    "zhipu_model": "cogview-4-250304",
+    
+    "qianfan_access_token": "your_qianfan_access_token",
+    "qianfan_model": "flux.1-schnell",
+    "qianfan_steps": 4,
+    
+    "tongyi_api_key": "your_tongyi_api_key",
+    "tongyi_base_url": "https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis",
+    "tongyi_model": "wanx-2.2",
+    
+    "ppio_api_key": "your_ppio_api_key",
+    "ppio_base_url": "https://api.ppinfra.com",
+    "ppio_model": "sd15",
+    "ppio_steps": 20,
+    "ppio_guidance_scale": 7.5,
+    
+    "volcengine_api_key": "your_volcengine_api_key",
+    "volcengine_base_url": "https://ark.cn-beijing.volces.com/api/v3",
+    "volcengine_model": "doubao-seedream-3-0-t2i-250415",
+    
+    "xunfei_app_id": "your_xunfei_app_id",
+    "xunfei_api_key": "your_xunfei_api_key",
+    "xunfei_api_secret": "your_xunfei_api_secret"
+  }
 }
 ```
 
-## 🎨 高级功能
+### 3. 获取API密钥
 
-### 智能参数解析
+#### 智谱AI
+1. 访问 [智谱AI开放平台](https://open.bigmodel.cn/)
+2. 注册账号并实名认证
+3. 创建API Key
 
-插件支持从自然语言中智能提取以下参数：
+#### 百度千帆
+1. 访问 [百度千帆大模型平台](https://qianfan.cloud.baidu.com/)
+2. 创建应用获取API Key和Secret Key
+3. 使用API Key和Secret Key获取Access Token
 
-- **服务商选择**：`@阿里云`、`@火山引擎`、`使用OpenAI生成`
-- **图片尺寸**：`1024x1024`、`方形`、`横版`、`竖版`
-- **艺术风格**：`写实`、`卡通`、`动漫`、`油画`、`水彩`、`素描`
-- **生成数量**：`3张图片`、`生成5个`
-- **质量设置**：`高质量`、`超高质量`、`快速生成`
-- **种子值**：`seed:12345`、`随机种子:67890`
+#### 阿里通义万相
+1. 访问 [阿里云控制台](https://dashscope.console.aliyun.com/)
+2. 开通灵积模型服务
+3. 创建API Key
 
-### 负载均衡策略
+#### PPIO
+1. 访问 [PPIO开放平台](https://ppinfra.com/)
+2. 注册账号并充值
+3. 获取API Token
 
-- **轮询模式**：依次使用各个服务商
-- **随机模式**：随机选择可用服务商
-- **优先级模式**：按配置顺序优先使用
-- **最快响应**：选择响应时间最短的服务商
+#### 火山引擎
+1. 访问 [火山引擎控制台](https://console.volcengine.com/)
+2. 开通豆包大模型服务
+3. 创建推理接入点获取API Key
 
-### 故障转移机制
+#### 科大讯飞
+1. 访问 [讯飞开放平台](https://console.xfyun.cn/)
+2. 创建文生图应用
+3. 获取APPID、API Key和API Secret
 
-- 自动检测服务商健康状态
-- 智能切换到可用服务商
-- 详细的错误日志和状态报告
-- 服务恢复后自动重新启用
+## 使用方法
 
-## 📊 监控与统计
+### 基本命令
+- `/tti <描述文字>` - 自动选择可用的供应商生成图片
+- `/文生图 <描述文字>` - 中文别名，功能相同
 
-### 健康检查
+### 指定供应商命令
+- `/tti-zhipu <描述>` - 使用智谱AI生成
+- `/tti-qianfan <描述>` - 使用百度千帆生成
+- `/tti-tongyi <描述>` - 使用阿里通义万相生成
+- `/tti-ppio <描述>` - 使用PPIO生成
+- `/tti-huoshan <描述>` - 使用火山引擎生成
+- `/tti-xunfei <描述>` - 使用科大讯飞生成
+
+### 使用示例
 ```
-/tti status
-```
-显示所有服务商的连接状态、API可用性和响应时间。
-
-### 使用统计
-```
-/tti stats
-```
-查看各服务商的请求数量、成功率、平均响应时间等详细统计。
-
-## 🔧 开发说明
-
-### 项目结构
-```
-astrbot_plugin_txsc/
-├── main.py                    # 主插件文件
-├── providers/                 # 服务商实现
-│   ├── base.py               # 基础Provider抽象
-│   ├── manager.py            # Provider管理器
-│   ├── tongyi_provider.py    # 阿里云通义万相
-│   ├── volcengine_provider.py # 字节跳动火山引擎
-│   ├── qianfan_provider.py   # 百度智能云千帆
-│   ├── xunfei_provider.py    # 科大讯飞星火
-│   ├── zhipu_provider.py     # 智谱清言
-│   ├── openai_provider.py    # OpenAI达芬奇
-│   ├── gemini_provider.py    # 谷歌双子座
-│   ├── ppio_provider.py      # PPIO图像生成
-│   └── grok_provider.py      # Grok图像生成
-├── utils/                     # 工具模块
-│   ├── config_validator.py   # 配置验证
-│   ├── image_processor.py    # 图片处理
-│   ├── message_parser.py     # 消息解析
-│   └── sdk_installer.py      # SDK自动安装
-├── _conf_schema.json         # 配置schema
-├── metadata.yaml             # 插件元数据
-└── requirements.txt          # 依赖列表
+/tti 一只可爱的橘色小猫咪，坐在阳光明媚的窗台上
+/tti-tongyi 科技感的未来城市夜景，霓虹灯闪烁
+/tti-huoshan 美丽的山水风景画，中国风格
+/tti-ppio anime style girl with blue hair
 ```
 
-### 代码规范
+## 功能特点
 
-- 严格遵循AstrBot开发规范
-- 使用完整的中文注释
-- 支持异步并发处理
-- 完善的错误处理机制
-- 统一的日志记录格式
+### 1. 多供应商支持
+- 支持6家主流国内AI图像生成服务
+- 自动故障转移机制，单个供应商失败时自动尝试其他供应商
+- 支持指定供应商生成，方便测试和调试
 
-## 🤝 贡献指南
+### 2. 异步任务处理
+- PPIO使用异步任务机制，支持长时间生成任务
+- 智能轮询机制，前6次每5秒轮询，后续每10秒
+- 最多轮询12次，总计约2分钟超时
+
+### 3. 智能错误处理
+- 详细的错误信息反馈
+- 区分配置错误、API错误和网络错误
+- 支持多供应商错误汇总报告
+
+### 4. 灵活配置
+- 支持自定义图片尺寸
+- 各供应商独立配置
+- 支持自定义API端点和模型参数
+
+## 故障排除
+
+### 常见问题
+
+#### Q: 提示"没有可用的文生图服务"
+A: 检查配置文件中是否正确设置了至少一个供应商的API密钥
+
+#### Q: 某个供应商一直失败
+A: 
+1. 检查API密钥是否正确
+2. 检查网络连接
+3. 查看日志获取详细错误信息
+4. 确认账户余额是否充足
+
+#### Q: PPIO生成时间很长
+A: PPIO使用异步任务机制，需要等待模型处理，正常情况下需要30秒到2分钟
+
+#### Q: 讯飞认证失败
+A: 检查APPID、API Key和API Secret是否正确，确保时间同步
+
+### 错误代码说明
+
+- `HTTP 401` - API密钥无效或过期
+- `HTTP 403` - 权限不足或余额不足
+- `HTTP 404` - API端点不存在（检查base_url配置）
+- `HTTP 429` - 请求频率过高
+- `HTTP 500` - 服务器内部错误
+
+### 日志调试
+
+插件会输出详细的调试信息，包括：
+- 供应商加载状态
+- API请求参数
+- 错误详情
+- 生成结果
+
+查看AstrBot日志获取更多信息。
+
+## 开发说明
+
+### 目录结构
+```
+astrbot_plugin_universal_t2i/
+├── main.py                 # 主插件文件
+├── _conf_schema.json      # 配置schema
+├── requirements.txt       # 依赖列表
+├── README.md             # 说明文档
+└── providers/            # 供应商实现
+    ├── __init__.py
+    ├── base.py           # 基础抽象类
+    ├── zhipu.py          # 智谱AI
+    ├── qianfan.py        # 百度千帆
+    ├── tongyi.py         # 阿里通义万相
+    ├── ppio.py           # PPIO
+    ├── volcengine.py     # 火山引擎
+    └── xunfei.py         # 科大讯飞
+```
+
+### 添加新供应商
+
+1. 在`providers/`目录下创建新的供应商实现文件
+2. 继承`BaseProvider`类
+3. 实现必要的抽象方法
+4. 在`main.py`中添加导入和映射
+5. 更新配置schema和README
+
+### 贡献指南
 
 欢迎提交Issue和Pull Request！
 
-## 📄 许可证
+1. Fork项目
+2. 创建功能分支
+3. 提交更改
+4. 推送到分支
+5. 创建Pull Request
 
-本项目采用 MIT 许可证。
 
-## 🙏 致谢
+## 许可证
 
-- [AstrBot](https://github.com/Soulter/AstrBot) - 优秀的多平台聊天机器人框架
-- 各AI图像生成服务商提供的强大API支持
-
----
-
-**开发者**: zhuiye  
-**项目地址**: https://github.com/zhuiye8/astrbot_plugin_txsc  
-**版本**: v2.0.0
+本项目采用MIT许可证。

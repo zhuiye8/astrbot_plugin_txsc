@@ -9,6 +9,21 @@
     "default": 512,
     "description": "默认图片高度"
   },
+  "openai_api_key": {
+    "type": "string",
+    "default": "",
+    "description": "OpenAI API密钥"
+  },
+  "openai_base_url": {
+    "type": "string",
+    "default": "https://api.openai.com/v1",
+    "description": "OpenAI API基础URL"
+  },
+  "openai_model": {
+    "type": "string",
+    "default": "dall-e-3",
+    "description": "OpenAI模型名称"
+  },
   "zhipu_api_key": {
     "type": "string",
     "default": "",
@@ -38,6 +53,31 @@
     "type": "int",
     "default": 4,
     "description": "千帆生成步数"
+  },
+  "xai_api_key": {
+    "type": "string",
+    "default": "",
+    "description": "xAI API密钥"
+  },
+  "xai_base_url": {
+    "type": "string",
+    "default": "https://api.x.ai/v1",
+    "description": "xAI API基础URL"
+  },
+  "xai_model": {
+    "type": "string",
+    "default": "grok-2-image",
+    "description": "xAI模型名称"
+  },
+  "gemini_api_key": {
+    "type": "string",
+    "default": "",
+    "description": "Google Gemini API密钥"
+  },
+  "gemini_model": {
+    "type": "string",
+    "default": "gemini-2.0-flash-exp",
+    "description": "Gemini模型名称"
   },
   "ppio_api_key": {
     "type": "string",
@@ -91,7 +131,7 @@
   },
   "volcengine_model": {
     "type": "string",
-    "default": "doubao-seedream-3-0-t2i-250415",
+    "default": "doubao-seedream-3-0-t2i",
     "description": "火山引擎模型名称"
   },
   "xunfei_app_id": {
@@ -107,6 +147,6 @@
   "xunfei_api_secret": {
     "type": "string",
     "default": "",
-    "description": "科大讯飞API密钥（Secret）"
+    "description": "科大讯飞API密钥"
   }
 }
