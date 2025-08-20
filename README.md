@@ -1,6 +1,6 @@
 # 通用文生图插件
 
-这是一个为AstrBot开发的通用文生图插件，支持多家国内AI图像生成服务商的统一调用，提供便捷的文本到图像生成功能。
+这是一个为AstrBot开发的通用文生图插件，支持多家国内AI图像生成服务商的统一调用，提供便捷的文本到图像生成功能。好用点个star
 
 ## 支持的服务商
 
@@ -178,7 +178,7 @@ A: 检查APPID、API Key和API Secret是否正确，确保时间同步
 
 ### 目录结构
 ```
-astrbot_plugin_universal_t2i/
+astrbot_plugin_txsc/
 ├── main.py                 # 主插件文件
 ├── _conf_schema.json      # 配置schema
 ├── requirements.txt       # 依赖列表
